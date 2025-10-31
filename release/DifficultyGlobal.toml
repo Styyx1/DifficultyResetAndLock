@@ -1,0 +1,5 @@
+[Settings]
+bEnableHardcoreMode = true
+
+[Debugging] 
+bEnableLogging = true 
