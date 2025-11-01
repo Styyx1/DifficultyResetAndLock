@@ -26,11 +26,15 @@ void Listener(SKSE::MessagingInterface::Message* a_msg) {
 		break;
 
 	case SKSE::MessagingInterface::kNewGame:
-		WriteNewGameSetting();
+		if(Config::Settings::start_game_change_adept.GetValue())
+			WriteNewGameSetting();
+		Events::DifficultyManager::UpdateFromPlayer();
 		break;
 
 	case SKSE::MessagingInterface::kPostLoadGame:
+		Events::DifficultyManager::UpdateFromPlayer();
 		Events::DifficultyManager::ApplyLockedDifficulty();
+		
 		break;
 
 	default:

@@ -30,7 +30,7 @@ namespace Events {
 				DifficultyManager::raceMenuReady = true;
 		}
 
-		if (!Config::Settings::enable_hardcore_mode.GetValue() || !DifficultyManager::IsLocked()){
+		if (!Config::Settings::enable_hardcore_mode.GetValue() && !DifficultyManager::IsLocked()){
 			DifficultyManager::UpdateFromPlayer();
 		}
 
@@ -75,9 +75,13 @@ namespace Events {
 		auto diff = a_this->GetSetting(Config::Constants::difficulty_name);
 		if (diff && setting == diff) {
 
-			if (Config::Settings::enable_hardcore_mode.GetValue() && DifficultyManager::IsLocked()) {
+			if (DifficultyManager::IsLocked()) {
+				logs::info("is locked is  {}", DifficultyManager::IsLocked() ? "true" : "false");
 				logs::info("Hardcore mode active — blocking difficulty INI write");
 				setting->data.i = DifficultyManager::lockedDifficulty;
+				auto player = RE::PlayerCharacter::GetSingleton();
+				auto diff = player->GetGameStatsData().difficulty;
+				DifficultyManager::ApplyGlobals(DifficultyManager::lockedDifficulty);
 			}
 			else {
 				DifficultyManager::UpdateFromPlayer();

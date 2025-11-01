@@ -1,5 +1,8 @@
 [Settings]
-bEnableHardcoreMode = true
+# prevent changing the difficulty after the race menu closes and after the first cell change in the game
+bEnableHardcoreMode = false
+# change the difficulty to adept no matter your ini settings at the start of a new game
+bSetDifficultyAtStart = false
 
 [Debugging] 
 bEnableLogging = true 

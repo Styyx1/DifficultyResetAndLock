@@ -45,10 +45,6 @@ namespace Events {
 
 			if (!hardcoreInitialized)
 				return;
-			if (!Config::Settings::enable_hardcore_mode.GetValue()) {
-				logs::info("Hardcore mode not active — skipping locked difficulty restore.");
-				return;
-			}
 			if (lockedDifficulty < 0) {
 				logs::warn("No locked difficulty found. Hardcore mode requires a new game!");
 				return;
@@ -63,7 +59,7 @@ namespace Events {
 
 
 
-	struct MenuEvent : public REX::Singleton<MenuEvent>, public RE::BSTEventSink<RE::MenuOpenCloseEvent> {		
+	struct MenuEvent : public REX::Singleton<MenuEvent>, public RE::BSTEventSink<RE::MenuOpenCloseEvent> {
 
 		void Register();
 

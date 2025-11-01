@@ -18,6 +18,7 @@ namespace Config {
 	struct Settings : REX::Singleton<Settings> {
 		static inline REX::TOML::Bool enable_hardcore_mode{ "Settings", "bEnableHardcoreMode", false };
 		static inline REX::TOML::Bool enable_logging{ "Debugging", "bEnableLogging", false };
+		static inline REX::TOML::Bool start_game_change_adept{ "Settings", "bSetDifficultyAtStart", false };
 
 		inline void LoadSettings() {
 			const auto toml = REX::TOML::SettingStore::GetSingleton();
